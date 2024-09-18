@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+
+  frontend-api:
+    build: ./frontend_api
+    ports:
+      - "5000:5000"
+    depends_on:
+      - redis
+
+  backend-api:
+    build: ./backend_api
+    ports:
+      - "5001:5000"
+    depends_on:
+      - redis
